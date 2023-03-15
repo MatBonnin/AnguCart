@@ -1,0 +1,24 @@
+<h1>Create a new deck</h1>
+
+<form [formGroup]="deckForm">
+
+  <div class="form-group">
+    <label for="name">Deck name:</label>
+    <input type="text" class="form-control" id="name" formControlName="name">
+    <div *ngIf="deckForm.get('name')?.invalid && (deckForm.get('name')?.dirty || deckForm.get('name')?.touched)" class="form-text text-danger">Please enter a name for your deck.</div>
+  </div>
+
+  <div class="form-group">
+    <label>Select cards:</label>
+    <div class="card-list">
+      <div class="card" *ngFor="let card of cards" [class.selected]="selectedCards.indexOf(card) !== -1" (click)="toggleCard(card.id)">
+        <h2>{{ card.name }}</h2>
+        <p>Value: {{ card.value }}</p>
+      </div>
+    </div>
+    <div *ngIf="selectedCards.length === 0" class="form-text text-danger">Please select at least one card for your deck.</div>
+  </div>
+
+  <button class="btn btn-primary" (click)="createDeck()">Create deck</button>
+
+</form>

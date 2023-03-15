@@ -1,0 +1,14 @@
+.deck {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.card {
+  margin-right: 15px;
+}

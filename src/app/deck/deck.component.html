@@ -1,0 +1,9 @@
+<div *ngIf="decks.length > 0">
+  <div *ngFor="let d of decks" class="deck">
+    <h2>{{d.name}}</h2>
+    <div  class="cards">
+      <app-card class="card" *ngFor="let c of d.cards" [cardId]="c"></app-card>
+    </div>
+
+  </div>
+</div>
