@@ -10,7 +10,7 @@
 
   <div class="form-group">
     <label>Select cards:</label>
-    <div class="card-list">
+    <div *ngIf="cards.length > 0" class="card-list">
       <div class="card" *ngFor="let card of cards" [class.selected]="selectedCards.indexOf(card) !== -1" (click)="toggleCard(card.id)">
         <h2>{{ card.name }}</h2>
         <p>Value: {{ card.value }}</p>

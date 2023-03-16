@@ -1,7 +1,7 @@
 <div>
   <div class="topPart">
   <app-card-list  (valueChange)="updateValueFromChild($event)"></app-card-list>
-  <button class="delete-button" (click)="deleteCard()">x</button>
+  <button class="delete-button" (click)="deleteCard()">  <i class="fa fa-trash"></i></button>
   <app-card class="card" [cardId]="cardId" >
   </app-card>
   </div>

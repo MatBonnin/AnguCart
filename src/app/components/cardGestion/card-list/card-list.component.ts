@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { DataService } from '../card-root/data.service';
+import { DataService } from '../../../services/data.service';
 
 
 @Component({

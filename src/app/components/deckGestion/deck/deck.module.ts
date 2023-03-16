@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DeckRoutingModule } from './deck-routing.module'
 import { DeckComponent } from './deck.component';
 import { DataDeckService } from './dataDeck.service';
-import { CardRootModule } from '../card-root/card-root.module';
+import { CardRootModule } from '../../cardGestion/card-root/card-root.module';
 
 
 

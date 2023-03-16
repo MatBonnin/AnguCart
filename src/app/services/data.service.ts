@@ -33,7 +33,13 @@ export class DataService {
 
   }
 
+  //DECK
+
   addDeck(deck: object){
     return this.http.put('http://localhost:3000/api/decks', deck);
+  }
+
+  delDeck(id: number){
+    return this.http.delete('http://localhost:3000/api/decks'+id);
   }
 }

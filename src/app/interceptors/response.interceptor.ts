@@ -14,13 +14,14 @@ export class ResponseInterceptor implements HttpInterceptor {
           if (error instanceof HttpErrorResponse) {
             // Handle HTTP errors
             console.error('HTTP error:', error);
-            if (error.error.message.indexOf('No object found') !== -1) {
+
               // Display an error message to the user
-              alert('Un element n\'as pas été trouvé pour la requete : ' + error.url);
-            }
+              alert('Une erreur est survenu : ' + error.message);
+
           } else {
             // Handle other errors
             console.error('Other error:', error);
+            alert('Other error: '+error.message);
           }
 
           return throwError(error);

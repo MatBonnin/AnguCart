@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { CardService } from './card.service';
-import { DataService } from './data.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-card-root',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataDeckService } from './dataDeck.service';
+
 @Component({
   selector: 'app-deck',
   templateUrl: './deck.component.html',
@@ -12,9 +13,20 @@ export class DeckComponent {
   apiData : Observable<any> = this.dataDeckService.getDecks();
   decks: any = {};
   ngOnInit(){
-    this.apiData.subscribe((carte : Object)=>{
-      console.log(carte)
-      this.decks = carte
+    this.apiData.subscribe((deck : Object)=>{
+      console.log(deck)
+      this.decks = deck
     });
+  }
+
+
+  deleteDeck(deckId:number){
+    this.dataDeckService.delDeck(deckId).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      })
   }
 }

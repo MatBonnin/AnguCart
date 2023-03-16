@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DataService } from '../card-root/data.service'
+import { DataService } from '../../../services/data.service'
 
 @Component({
   selector: 'app-card',

@@ -1,0 +1,51 @@
+.deck {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.card-container {
+  margin-right: 15px;
+}
+
+.delete-button {
+  background-color: #f70000;
+  border: none;
+  border-radius: 50%;
+  color: #555;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  height: 24px;
+  line-height: 22px;
+  color: white;
+  text-align: center;
+  width: 24px;
+}
+
+.card-container {
+  position: relative;
+  display: inline-block;
+}
+
+.card-delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #f70000;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  width: 20px;
+  z-index: 1;
+}

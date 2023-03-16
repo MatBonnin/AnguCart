@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../card-root/data.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-card-form',

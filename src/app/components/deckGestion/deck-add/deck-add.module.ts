@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CardRootModule } from '../card-root/card-root.module';
+import { CardRootModule } from '../../cardGestion/card-root/card-root.module';
 import { DeckAddComponent } from './deck-add.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
