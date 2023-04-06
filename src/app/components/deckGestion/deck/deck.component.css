@@ -49,3 +49,17 @@
   width: 20px;
   z-index: 1;
 }
+
+.fake-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  width: 200px;
+  height: 300px;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+  font-size: 24px;
+  color: #ccc;
+}

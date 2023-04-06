@@ -59,10 +59,7 @@ input[type="text"] {
   font-size: 16px;
 }
 
-.card.selected {
-  background-color: #007bff;
-  color: #fff;
-}
+
 
 .btn {
   display: block;
@@ -84,3 +81,6 @@ input[type="text"] {
   background-color: #007bff;
   color: #fff;
 }
+
+
+

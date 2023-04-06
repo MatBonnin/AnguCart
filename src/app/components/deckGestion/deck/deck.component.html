@@ -6,9 +6,14 @@
       <div class="card-container" *ngFor="let c of d.cards">
         <app-card class="card" [cardId]="c"></app-card>
         <!-- Ajoutez le bouton de suppression avec l'icône pour chaque carte ici -->
-        <button class="card-delete-button">
+        <button class="card-delete-button" (click)="deleteCard(d.id,c)">
           <i class="fa fa-trash"></i>
         </button>
+      </div>
+      <div class="card-container add-card" (click)="addCard(d.id)" >
+        <div class="fake-card">
+          <i class="fa fa-plus"></i>
+        </div>
       </div>
     </div>
   </div>

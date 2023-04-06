@@ -8,7 +8,11 @@ import { DeckComponent } from './components/deckGestion/deck/deck.component';
 import { MenuComponent } from './components/menu/menu.component';
 
 
-const routes: Routes = [{path:'',component:CardRootComponent},{path:'card',component:CardRootComponent},{path:'deck',component:DeckComponent},{path:'deck/create',component:DeckAddComponent}];
+const routes: Routes = [
+  {path:'',component:CardRootComponent},
+  {path:'card',component:CardRootComponent},
+  {path:'deck',component:DeckComponent},
+  {path:'deck/create',component:DeckAddComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

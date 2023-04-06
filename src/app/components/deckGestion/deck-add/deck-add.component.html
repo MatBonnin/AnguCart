@@ -1,7 +1,7 @@
-<h1>Create a new deck</h1>
+
 
 <form [formGroup]="deckForm">
-
+  <h1>Create a new deck</h1>
   <div class="form-group">
     <label for="name">Deck name:</label>
     <input type="text" class="form-control" id="name" formControlName="name">
@@ -11,12 +11,14 @@
   <div class="form-group">
     <label>Select cards:</label>
     <div *ngIf="cards.length > 0" class="card-list">
-      <div class="card" *ngFor="let card of cards" [class.selected]="selectedCards.indexOf(card) !== -1" (click)="toggleCard(card.id)">
+      <div class="card" *ngFor="let card of cards" [ngClass]="{ 'selected': isSelected(card.id) }" (click)="toggleCard(card)">
         <h2>{{ card.name }}</h2>
         <p>Value: {{ card.value }}</p>
       </div>
     </div>
     <div *ngIf="selectedCards.length === 0" class="form-text text-danger">Please select at least one card for your deck.</div>
+    <div *ngIf="selectedCards.length === 5" class="form-text text-danger">Nombre maximal de carte atteint.</div>
+    <div *ngIf="totalCardValue > 0" class="form-text text-danger">Point: {{totalCardValue}}/30</div>
   </div>
 
   <button class="btn btn-primary" (click)="createDeck()">Create deck</button>

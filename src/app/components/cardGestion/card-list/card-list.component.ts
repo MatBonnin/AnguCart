@@ -20,6 +20,8 @@ export class CardListComponent {
       this.cartes = carte
     });
   }
+
+
   value : string = "";
   @Output() valueChange = new EventEmitter<string>();
   updateValue(value: string) {

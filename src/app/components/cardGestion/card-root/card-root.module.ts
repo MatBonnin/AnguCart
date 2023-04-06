@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardFormComponent } from '../card-form/card-form.component';
 import { CardComponent } from '../card/card.component';
 import { CardService } from './card.service';
+import { DataDeckService } from '../../deckGestion/deck/dataDeck.service';
 
 
 
@@ -17,7 +18,7 @@ import { CardService } from './card.service';
   imports: [
     CommonModule,ReactiveFormsModule
   ],
-  providers:[DataService,CardService],
-  exports:[CardComponent]
+  providers:[DataService,CardService,DataDeckService],
+  exports:[CardComponent,CardRootComponent]
 })
 export class CardRootModule { }

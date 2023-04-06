@@ -18,4 +18,8 @@ export class DataDeckService {
   delDeck(id: number){
     return this.http.delete('http://localhost:3000/api/decks/'+id);
   }
+
+  updateDeck(deck: any){
+    return this.http.post('http://localhost:3000/api/decks', deck);
+  }
 }

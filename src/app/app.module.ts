@@ -13,6 +13,10 @@ import { CardRootModule } from './components/cardGestion/card-root/card-root.mod
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { DeckAddModule } from './components/deckGestion/deck-add/deck-add.module';
 import { DeckModule } from './components/deckGestion/deck/deck.module';
+import { AddCardDeckDialogComponent } from './add-card-deck-dialog/add-card-deck-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { addCardDeckDialogModule } from './add-card-deck-dialog/add-card-deck-dialog.module';
+
 
 
 
@@ -27,14 +31,16 @@ import { DeckModule } from './components/deckGestion/deck/deck.module';
     CardRootModule,
     HttpClientModule,
     DeckAddModule,
-    DeckModule
-
+    DeckModule,
+    addCardDeckDialogModule
   ],
-  providers: [ {
+  providers: [
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: ResponseInterceptor,
     multi: true
-  }],
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

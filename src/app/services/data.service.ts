@@ -26,8 +26,11 @@ export class DataService {
   addCard(card: object){
     return this.http.put('http://localhost:3000/api/cards', card);
   }
+  
 
   delCard(id: number){
+
+
     return this.http.delete('http://localhost:3000/api/cards/'+id);
 
 

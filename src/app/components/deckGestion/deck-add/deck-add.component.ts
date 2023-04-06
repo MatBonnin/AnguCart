@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DeckAddComponent {
   deckForm: FormGroup;
   selectedCards: any = [];
+  totalCardValue: number = 0;
 
   constructor(private dataService: DataService,private fb: FormBuilder) {
     this.deckForm = this.fb.group({
@@ -20,15 +21,48 @@ export class DeckAddComponent {
     });
   }
 
+  cards: any = [];
+  ngOnInit(){
+
+    this.dataService.getCards().subscribe((cartes : any)=>{
+      console.log(cartes)
+      // this.cards = carte
+      for(let i= 0; i<cartes.length;i++){
+        this.dataService.getCardsById(cartes[i].id).subscribe((carte : any)=>{
+          console.log(carte)
+          this.cards.push(carte)
+        });
+      }
 
 
-  toggleCard(cardId: any) {
+    });
+
+
+
+  }
+
+  isSelected(cardId: any): boolean {
+    return this.selectedCards.indexOf(cardId) !== -1;
+  }
+
+  toggleCard(card: any) {
+    const cardId:number = card.id
     // Add or remove the selected card from the list
-    if (this.selectedCards.indexOf(cardId) === -1) {
-      this.selectedCards.push(cardId);
-    } else {
-      this.selectedCards.splice(this.selectedCards.indexOf(cardId), 1);
-    }
+
+      if (this.selectedCards.indexOf(cardId) === -1 ) {
+
+          if(this.selectedCards.length < 5 && this.totalCardValue + card.value <= 30){
+            this.totalCardValue += card.value;
+            this.selectedCards.push(cardId);
+          }
+
+
+      } else {
+        this.totalCardValue -= card.value;
+        this.selectedCards.splice(this.selectedCards.indexOf(cardId), 1);
+      }
+
+
   }
 
   createDeck() {
@@ -56,12 +90,5 @@ export class DeckAddComponent {
     }
   }
 
-  apiData : Observable<any> = this.dataService.getCards();
-  cards: any = {};
-  ngOnInit(){
-    this.apiData.subscribe((carte : Object)=>{
-      console.log(carte)
-      this.cards = carte
-    });
-  }
+
 }

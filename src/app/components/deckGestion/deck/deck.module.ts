@@ -14,6 +14,7 @@ import { CardRootModule } from '../../cardGestion/card-root/card-root.module';
     DeckRoutingModule,
     CardRootModule,
   ],
-  providers:[DataDeckService]
+  exports: [DeckComponent],
+  providers:[]
 })
 export class DeckModule { }

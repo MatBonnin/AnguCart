@@ -14,7 +14,7 @@ export class CardFormComponent {
   constructor(private fb: FormBuilder,private dataService: DataService) {
     this.myForm = this.fb.group({
       name: [null,Validators.required],
-      value: [null,Validators.required]
+      value: [null,[Validators.required,Validators.max(10)]]
 
     });
   }

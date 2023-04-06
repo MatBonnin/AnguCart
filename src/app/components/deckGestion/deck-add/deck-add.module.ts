@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CardRootModule } from '../../cardGestion/card-root/card-root.module';
 import { DeckAddComponent } from './deck-add.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,8 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     CardRootModule,
+    FormsModule,
     ReactiveFormsModule
   ],
+  exports:[DeckAddComponent],
   providers:[]
 })
 export class DeckAddModule { }

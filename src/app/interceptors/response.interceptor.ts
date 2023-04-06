@@ -11,18 +11,18 @@ export class ResponseInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError(error => {
-          if (error instanceof HttpErrorResponse) {
-            // Handle HTTP errors
-            console.error('HTTP error:', error);
+          // if (error instanceof HttpErrorResponse) {
+          //   // Handle HTTP errors
+          //   console.error('HTTP error:', error);
 
-              // Display an error message to the user
-              alert('Une erreur est survenu : ' + error.message);
+          //     // Display an error message to the user
+          //     alert('Une erreur est survenu : ' + error.message);
 
-          } else {
-            // Handle other errors
-            console.error('Other error:', error);
-            alert('Other error: '+error.message);
-          }
+          // } else {
+          //   // Handle other errors
+          //   console.error('Other error:', error);
+          //   alert('Other error: '+error.message);
+          // }
 
           return throwError(error);
         })
