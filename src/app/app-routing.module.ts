@@ -5,7 +5,7 @@ import { DeckAddComponent } from './components/deckGestion/deck-add/deck-add.com
 import { DeckComponent } from './components/deckGestion/deck/deck.component';
 import { GestionConnexionRootComponent } from './components/gestionConnexion/gestion-connexion-root/gestion-connexion-root.component';
 import { AuthGuard } from './auth.guard'; // Ajoutez cet import
-import { GameComponent } from './game/game.component';
+import { GameComponent } from './components/game/game.component';
 
 const routes: Routes = [
   {path:'',component:CardRootComponent, canActivate: [AuthGuard]}, // Ajoutez canActivate

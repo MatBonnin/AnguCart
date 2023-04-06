@@ -20,7 +20,7 @@ import { addCardDeckDialogModule } from './add-card-deck-dialog/add-card-deck-di
 import { gestionConnexionModule } from './components/gestionConnexion/gestion-connexion-root/gestion-connexion-root.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { GameComponent } from './game/game.component';
+import { GameComponent } from './components/game/game.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 

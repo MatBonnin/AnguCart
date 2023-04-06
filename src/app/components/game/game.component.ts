@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataDeckService } from '../components/deckGestion/deck/dataDeck.service';
-import { DataService } from '../services/data.service';
+import { DataDeckService } from '../deckGestion/deck/dataDeck.service';
+import { DataService } from '../../services/data.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class GameComponent  {
   // ...
   playerDeck: any; // Le deck du joueur
   computerDeck: any; // Le deck de l'ordinateur
-  availableDecks: any[] = []; // Liste des decks disponibles
+  availableDecks: any; // Liste des decks disponibles
   selectedDeckId: number | null = null; // L'ID du deck sélectionné par le joueur
   usedPlayerCards: any[] = []; // Les cartes déjà utilisées par le joueur
   usedComputerCards: any[] = []; // Les cartes déjà utilisées par l'ordinateur
@@ -39,7 +39,7 @@ export class GameComponent  {
     this.selectedDeckId = deckId;
 
     // Trouvez le deck sélectionné et attribuez-le au joueur
-    this.playerDeck= this.availableDecks.find(deck => deck.id === deckId);
+    this.playerDeck= this.availableDecks.find((deck: { id: number; }) => deck.id === deckId);
 
 
     // Sélectionnez un deck aléatoire pour l'ordinateur
@@ -58,15 +58,11 @@ export class GameComponent  {
     this.playerCard = card;
     this.usedPlayerCards.push(card);
 
-    // Sélectionnez une carte aléatoire pour l'ordinateur qui n'a pas encore été utilisée
-    do {
-      this.computerCard = this.computerDeck.cards[Math.floor(Math.random() * this.computerDeck.cards.length)];
-    } while (this.usedComputerCards.includes(this.computerCard));
+    let tries = this.computerDeck.cards.length;
+    let availableCards = this.computerDeck.cards.filter((card: any) => !this.usedComputerCards.includes(card));
+    let randomIndex = Math.floor(Math.random() * availableCards.length);
+    this.computerCard = availableCards[randomIndex];
     this.usedComputerCards.push(this.computerCard);
-
-
-    this.playerCard = card;
-    this.computerCard = this.computerDeck.cards[Math.floor(Math.random() * this.computerDeck.cards.length)];
 
     this.showCardsInPlay = true;
     setTimeout(() => {
@@ -119,7 +115,7 @@ export class GameComponent  {
     this.computerDeck.cards = this.computerDeck.cards.filter((card: any) => card !== this.computerCard);
   }
 
-  resetGame() {
+  async resetGame() {
     this.playerScore = 0;
     this.computerScore = 0;
     this.round = 1;
@@ -128,6 +124,7 @@ export class GameComponent  {
     this.computerDeck = null;
     this.usedPlayerCards = [];
     this.usedComputerCards = [];
+    this.availableDecks =  await this.dataDeckService.getDecks().toPromise()
   }
 
 

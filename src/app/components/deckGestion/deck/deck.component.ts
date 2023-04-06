@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { AddCardDeckDialogComponent } from 'src/app/add-card-deck-dialog/add-card-deck-dialog.component';
+import { Card } from 'src/app/interfaces/card.types';
+import { Deck } from 'src/app/interfaces/deck.types';
 import { DataDeckService } from './dataDeck.service';
+
 
 @Component({
   selector: 'app-deck',
@@ -13,15 +16,14 @@ export class DeckComponent {
 
   constructor(private dataDeckService: DataDeckService,private dialog: MatDialog) { }
   apiData : Observable<any> =  this.dataDeckService.getDecks();
-  decks: any = {};
+  decks: Deck[] = [];
+
   ngOnInit(){
-    this.apiData.subscribe((deck : Object)=>{
+    this.apiData.subscribe((deck : Deck[])=>{
       console.log(deck)
       this.decks = deck
     });
   }
-
-
 
   deleteDeck(deckId:number){
     this.dataDeckService.delDeck(deckId).subscribe(
@@ -36,7 +38,13 @@ export class DeckComponent {
   deleteCard(deckId:number, cardId:number){
 
     // Recherche de l'objet deck correspondant à l'ID
-    const deck = this.decks.find((d:any) => d.id === deckId);
+    const deck = this.decks.find((d:Deck) => d.id === deckId);
+
+    if (!deck) {
+      console.error(`Deck with id ${deckId} not found`);
+      return;
+    }
+
 
     // Recherche de l'index de la carte à supprimer
     const cardIndex = deck.cards.indexOf(cardId);
@@ -46,8 +54,6 @@ export class DeckComponent {
       deck.cards.splice(cardIndex, 1);
     }
 
-
-
     // Mise à jour du deck
     this.dataDeckService.updateDeck(deck).subscribe(
       response => {
@@ -56,14 +62,17 @@ export class DeckComponent {
       error => {
         console.log(error);
       })
+  }
+
+  addCard(deckId: number): void {
+    const deck = this.decks.find((d:Deck) => d.id === deckId);
+    if (!deck) {
+      console.error(`Deck with id ${deckId} not found`);
+      return;
     }
-
-    addCard(deckId: number): void {
-      const deck = this.decks.find((d:any) => d.id === deckId);
-      const dialogRef = this.dialog.open(AddCardDeckDialogComponent, {
-        width: '400px',
-        data:{deck: deck}
-      });
-
-}
+    const dialogRef = this.dialog.open(AddCardDeckDialogComponent, {
+      width: '400px',
+      data:{deck: deck}
+    });
+  }
 }

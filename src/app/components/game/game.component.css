@@ -9,6 +9,18 @@
   justify-content: space-around;
 }
 
+.decks{
+  display: flex;
+  flex-direction: row;
+}
+
+.selectionDeck{
+  /* centrer */
+  max-width: 600px;
+
+  margin: 0 auto;
+}
+
 .message{
  display: flex;
   justify-content: center;

@@ -11,7 +11,7 @@ export class DataDeckService {
 
   getDecks() {
 
-    const decks : Observable<any> = this.http.get('http://localhost:3000/api/decks');
+    const decks : Observable<Object> = this.http.get('http://localhost:3000/api/decks');
 
     return decks
   }

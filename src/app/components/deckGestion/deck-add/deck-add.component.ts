@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataService } from '../../../services/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Card } from 'src/app/interfaces/card.types';
 
 @Component({
   selector: 'app-deck-add',
@@ -21,23 +22,20 @@ export class DeckAddComponent {
     });
   }
 
-  cards: any = [];
+
+
+ cards: Card[] = [];
   ngOnInit(){
 
     this.dataService.getCards().subscribe((cartes : any)=>{
-      console.log(cartes)
       // this.cards = carte
       for(let i= 0; i<cartes.length;i++){
         this.dataService.getCardsById(cartes[i].id).subscribe((carte : any)=>{
-          console.log(carte)
+
           this.cards.push(carte)
         });
       }
-
-
     });
-
-
 
   }
 
@@ -45,7 +43,7 @@ export class DeckAddComponent {
     return this.selectedCards.indexOf(cardId) !== -1;
   }
 
-  toggleCard(card: any) {
+  toggleCard(card: Card) {
     const cardId:number = card.id
     // Add or remove the selected card from the list
 
