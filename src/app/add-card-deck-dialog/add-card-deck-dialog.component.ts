@@ -13,7 +13,7 @@ import { DataService } from '../services/data.service';
 export class AddCardDeckDialogComponent {
   selectedCards: any = [];
   deckForm: FormGroup;
-  totalCardValue: number = 0;
+  // totalCardValue: number = 0;
 
   constructor(public dialogRef: MatDialogRef<AddCardDeckDialogComponent>,private dataService: DataService,@Inject(MAT_DIALOG_DATA) public data: any,private dataDeckService: DataDeckService,private fb: FormBuilder) {
     this.deckForm = this.fb.group({
@@ -47,15 +47,15 @@ export class AddCardDeckDialogComponent {
     const index = this.data.deck.cards.indexOf(cardId)
 
       if (index === -1) {
-        if(this.data.deck.cards.length < 5 && this.totalCardValue <= 30 ){
+        if(this.data.deck.cards.length < 5 && this.totalCardValue() + card.value <= 30 ){
         this.data.deck.cards.push(cardId);
-        this.totalCardValue += card.value;
+
         }
       else{
         console.log("Vous avez atteint le nombre maximum de carte")
       }
       } else {
-        this.totalCardValue -= card.value;
+
         this.data.deck.cards.splice(index, 1);
       }
 
@@ -81,7 +81,17 @@ export class AddCardDeckDialogComponent {
     this.dialogRef.close();
   }
   isSelected(cardId: any): boolean {
+
     return this.data.deck.cards.indexOf(cardId) !== -1;
+  }
+
+  totalCardValue(){
+    return this.cards.reduce((totalValue: number, card: any) => {
+      if (this.data.deck.cards.includes(card.id)) {
+        return totalValue + card.value;
+      }
+      return totalValue;
+    }, 0);
   }
 
   onAdd(): void {

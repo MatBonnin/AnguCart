@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Nom d'utilisateur</mat-label>
+    <input
+      formControlName="login"
+      matInput
+      type="text"
+      placeholder="Nom d'utilisateur"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Mot de passe</mat-label>
+    <input
+      formControlName="password"
+      matInput
+      type="password"
+      placeholder="Mot de passe"
+    />
+  </mat-form-field>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <button mat-raised-button color="primary" type="submit">Se connecter</button>
+</form>

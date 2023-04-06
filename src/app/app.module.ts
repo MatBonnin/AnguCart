@@ -17,6 +17,13 @@ import { AddCardDeckDialogComponent } from './add-card-deck-dialog/add-card-deck
 import { MatDialogModule } from '@angular/material/dialog';
 import { addCardDeckDialogModule } from './add-card-deck-dialog/add-card-deck-dialog.module';
 
+import { gestionConnexionModule } from './components/gestionConnexion/gestion-connexion-root/gestion-connexion-root.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { GameComponent } from './game/game.component';
+import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 
@@ -24,22 +31,33 @@ import { addCardDeckDialogModule } from './add-card-deck-dialog/add-card-deck-di
   declarations: [
     AppComponent,
     MenuComponent,
+    GameComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CardRootModule,
     HttpClientModule,
+    gestionConnexionModule,
     DeckAddModule,
     DeckModule,
-    addCardDeckDialogModule
+    addCardDeckDialogModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
   ],
   providers: [
     {
     provide: HTTP_INTERCEPTORS,
     useClass: ResponseInterceptor,
     multi: true
-  }
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  },
 ],
   bootstrap: [AppComponent]
 })

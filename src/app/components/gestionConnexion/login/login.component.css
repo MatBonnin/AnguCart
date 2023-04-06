@@ -1,0 +1,21 @@
+form {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}
+
+button {
+  align-self: flex-end;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 15px;
+}

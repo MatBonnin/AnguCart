@@ -1,0 +1,47 @@
+<div *ngIf="!playerDeck">
+  <h2>Choisissez un deck :</h2>
+  <mat-card *ngFor="let deck of availableDecks">
+    <mat-card-content>
+      {{ deck.name }}
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="selectDeck(deck.id)">
+        Sélectionner
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div *ngIf="playerDeck?.cards" class="game-board">
+  <h4 class="message">{{ message }}</h4>
+  <h3 class="tour">Tour : {{ round }} / {{ maxRounds }}</h3>
+  <div class="game-score">
+    <h4>Joueur : {{ playerScore }}</h4>
+    <h4>Ordinateur : {{ computerScore }}</h4>
+  </div>
+
+  <div *ngIf="showCardsInPlay" class="cards-in-play">
+    <div>
+      <h4>Carte du joueur</h4>
+      <app-card [cardId]="playerCard" class="card"></app-card>
+    </div>
+    <div>
+      <h4>Carte de l'ordi</h4>
+      <app-card [cardId]="computerCard" class="card"></app-card>
+    </div>
+  </div>
+
+  <button mat-raised-button (click)="resetGame()">Réinitialiser</button>
+
+  <div class="player-cards">
+    <span class="nameDeck">Mon deck : {{ playerDeck.name }} </span>
+    <div class="cards">
+      <app-card
+        *ngFor="let card of playerDeck.cards"
+        class="card"
+        [cardId]="card"
+        (click)="selectCard(card)"
+      ></app-card>
+    </div>
+  </div>
+</div>

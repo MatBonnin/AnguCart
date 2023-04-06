@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpResponse, HttpErrorResponse, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
+import {
+  HttpInterceptor,
+  HttpResponse,
+  HttpErrorResponse,
+  HttpHandler,
+  HttpRequest,
+  HttpEvent
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("retour")
     return next.handle(request)
       .pipe(
+        tap(event => {
+          if (event instanceof HttpResponse) {
+            if (event.body?.token){
+              localStorage.setItem('token', event.body.token);
+            }
+
+          }
+        }),
         catchError(error => {
-          // if (error instanceof HttpErrorResponse) {
-          //   // Handle HTTP errors
-          //   console.error('HTTP error:', error);
-
-          //     // Display an error message to the user
-          //     alert('Une erreur est survenu : ' + error.message);
-
-          // } else {
-          //   // Handle other errors
-          //   console.error('Other error:', error);
-          //   alert('Other error: '+error.message);
-          // }
-
+          // Handle errors as before
           return throwError(error);
         })
       );

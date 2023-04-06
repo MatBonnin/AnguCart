@@ -1,0 +1,37 @@
+.player-cards{
+  display: flex;
+  flex-direction: column;
+}
+
+.cards{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.message{
+ display: flex;
+  justify-content: center;
+  color: red;
+}
+
+.tour{
+  display: flex;
+  justify-content: center;
+}
+.nameDeck{
+  /* centrer */
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.cards-in-play{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+/* app-card {
+  max-height: 10px;
+  margin-left: 40px;
+} */
