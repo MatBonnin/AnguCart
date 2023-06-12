@@ -9,33 +9,38 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Récupérez votre token JWT ici, par exemple depuis le stockage local
-    // ou un service de gestion d'authentification.
     const token = localStorage.getItem('token');
-    console.log("depart")
+
     if (token) {
-      // Clone la requête et ajoute le token dans l'en-tête "Authorization"
       const clonedRequest = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
+          Authorization: `${token}`
         }
+
       });
 
       return next.handle(clonedRequest)
         .pipe(
           tap(event => {
             if (event instanceof HttpResponse) {
-              console.log('Response data:', event.body);
+              console.log(event)
             }
           }),
           catchError(error => {
             // Handle errors as before
+            console.log("erreur 1")
+            if (error.statusText === "Unauthorized"){
+              localStorage.removeItem('token');
+              this.router.navigate(['/login']);
+
+            }
             return throwError(error);
           })
         );
@@ -44,11 +49,14 @@ export class AuthInterceptor implements HttpInterceptor {
         .pipe(
           tap(event => {
             if (event instanceof HttpResponse) {
-              console.log('Response data:', event.body);
+              if (event.body?.token){
+                localStorage.setItem('token', event.body.token);
+              }
             }
           }),
           catchError(error => {
             // Handle errors as before
+            console.log("erreur 2")
             return throwError(error);
           })
         );

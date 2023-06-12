@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
-import { CardService } from './card.service';
-import { DataService } from '../../../services/data.service';
-import { DataDeckService } from '../../deckGestion/deck/dataDeck.service';
+
+import { CardService } from '../../../services/card.service';
+import { DeckService } from '../../../services/deck.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { Deck } from 'src/app/interfaces/deck.types';
 
 @Component({
   selector: 'app-card-root',
@@ -10,58 +12,53 @@ import { DataDeckService } from '../../deckGestion/deck/dataDeck.service';
   styleUrls: ['./card-root.component.css']
 })
 export class CardRootComponent {
-  test : string = "salut"
-  cardId: any = -1
-  decks:any = null
 
-  constructor(private dataService: DataService,private dataDeckService: DataDeckService,private cd: ChangeDetectorRef) { }
+  cardId: string = '';
+  decks: Deck[] = [];
+  refresh: boolean = false;
+
+  constructor(private CardService: CardService, private deckService: DeckService, private cd: ChangeDetectorRef, private snackbarService: SnackbarService) { }
   valueFromChild = '';
 
-  updateValueFromChild(value: any) {
-    console.log(value)
+  updateValueFromChild(value: string) {
     this.cardId = value;
   }
 
-  ngOnInit(){
-    this.dataDeckService.getDecks().subscribe((decks : any)=>{
-      console.log(decks)
-     this.decks = decks
-
-    });
-
+  ngOnInit() {
+    this.refreshDecks();
   }
 
+  refreshDecks() {
+    this.deckService.getDecks().subscribe((decks: any) => {
+      this.decks = decks;
+    });
+  }
 
+  refreshCardList(){
+    this.refresh = !this.refresh;
+  }
 
+  deleteCard():void {
+    const isInDeck = this.decks.some((deck: Deck) => deck.cards.includes(this.cardId));
 
-
-  deleteCard(){
-
-
-    let isInDeck = false;
-    for (let i = 0; i < this.decks.length; i++) {
-      const deck = this.decks[i];
-      for (let j = 0; j < deck.cards.length; j++) {
-        const cardId = deck.cards[j];
-        if (cardId === this.cardId) {
-          console.log(`Found target card in deck ${deck.name}`);
-          // faire quelque chose si l'ID de la carte correspond à la variable souhaitée
-          isInDeck = true;
-        }
-      }
-    }
-    if(isInDeck === false){
-      this.dataService.delCard(this.cardId).subscribe(
+    if (!isInDeck) {
+      this.CardService.delCard(this.cardId).subscribe(
         response => {
-
-          console.log(response);
+          this.refreshCardList()
         },
         error => {
-          console.log(error);
-        })
+          // Handle error if necessary
+        });
+    } else {
+      this.snackbarService.show("Erreur : la carte ne peut pas être supprimée car elle est présente dans un deck.", "error");
     }
-
-
   }
+
+
+
+
+
+
+
 
 }

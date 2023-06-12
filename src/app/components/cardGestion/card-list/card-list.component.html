@@ -1,28 +1,9 @@
-<!-- <div class="main">
-  <div *ngFor="let c of cartes" class="card">
-    <div  class="card-title">
-      <h5 class="card-title">{{c.name}}</h5>
-      </div>
-
-    <div  class="card-body">
-
-      <p class="card-text">{{c.value}}</p>
-      <button class="btn">Supprimer</button>
-    </div>
-  </div>
-</div>
- -->
-
- <!-- <ul class="vertical-list">
-  <li *ngFor="let c of cartes" (click)="updateValue(c.id)" >{{c.value}}</li>
-
-</ul> -->
-
 <div *ngIf="cartes.length > 0" class="card-list">
-
-    <button  *ngFor="let c of cartes" class="card-item" (click)="updateValue(c.id)" >{{c.name}}</button>
-
-
-
+  <button
+    *ngFor="let c of cartes"
+    class="card-item"
+    (click)="updateValue(c.id)"
+  >
+    {{ c.name }}
+  </button>
 </div>
-

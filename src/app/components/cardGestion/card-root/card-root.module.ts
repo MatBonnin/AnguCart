@@ -1,24 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CardRootComponent } from './card-root.component';
-
-import {  CardListComponent } from '../card-list/card-list.component';
-import { DataService } from '../../../services/data.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CardFormComponent } from '../card-form/card-form.component';
 import { CardComponent } from '../card/card.component';
-import { CardService } from './card.service';
-import { DataDeckService } from '../../deckGestion/deck/dataDeck.service';
-
-
-
+import { CardFormComponent } from '../card-form/card-form.component';
+import { CardListComponent } from '../card-list/card-list.component';
+import { CardRootComponent } from './card-root.component';
+import { CardService } from '../../../services/card.service';
+import { CommonModule } from '@angular/common';
+import { DeckService } from '../../../services/deck.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CardRootComponent,CardListComponent,CardFormComponent,CardComponent],
   imports: [
-    CommonModule,ReactiveFormsModule
+    CommonModule,ReactiveFormsModule,MatSnackBarModule,  HttpClientModule,
   ],
-  providers:[DataService,CardService,DataDeckService],
+  providers:[CardService,CardService,DeckService],
   exports:[CardComponent,CardRootComponent]
 })
 export class CardRootModule { }

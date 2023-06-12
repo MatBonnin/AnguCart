@@ -7,15 +7,11 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<style>
-
-</style>
+<style></style>
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-
-<app-menu></app-menu>
-
+  <app-menu *ngIf="menuVisible$ | async"></app-menu>
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

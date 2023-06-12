@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DataService } from '../../../services/data.service'
+
+import { Card } from 'src/app/interfaces/card.types';
+import { CardService } from '../../../services/card.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-card',
@@ -8,29 +10,42 @@ import { DataService } from '../../../services/data.service'
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  @Input() cardId: any;
+  @Input() cardId: string='' ;
 
-  carte: any = null;
+  carte: Card = {
+    id: '',
+    name: '',
+    value: 0,
+    imageUrl: '' // Ajoutez une propriété imageUrl à votre interface Card.
+  };
 
-  constructor(private dataService: DataService) { }
+  // N'oubliez pas d'injecter HttpClient pour effectuer des requêtes HTTP.
+  constructor(private cardService: CardService, private http: HttpClient) { }
 
   ngOnChanges(){
-    if (this.cardId != -1){
-      let apiData = this.dataService.getCardsById(this.cardId);
-    apiData.subscribe((carte : Object)=>{
-      console.log(carte)
-      this.carte = carte
-    });
+    if (this.cardId !== '') {
+      console.log(this.cardId);
+      let apiData = this.cardService.getCardsById(this.cardId);
+      apiData.subscribe((carte : Card) => {
+        this.carte = carte;
+        // Appeler getImages après avoir reçu les données de la carte.
+        // this.getImages(this.carte.name); enlever le commentaire pour avoir des images associé a la card
+      });
     }
-
   }
-  // ngOnInit(){
-  //   this.apiData = this.dataService.getCardsById(this.cardId);
-  //   this.apiData.subscribe((carte : Object)=>{
-  //     console.log(carte)
-  //     this.carte = carte
-  //   });
-  // }
 
+  getImages(query: string) {
+    const apiKey = 'AIzaSyDf_9ZgkA6wxfhDFtEv7M_ugJ-0-h78ewc'; // Remplacez par votre clé API Google.
+    const cx = '05303efd5f047435e'; // Remplacez par votre identifiant de moteur de recherche.
+
+    this.http.get(`https://www.googleapis.com/customsearch/v1?q=${query}&cx=${cx}&key=${apiKey}&searchType=image`)
+      .subscribe((data: any) => {
+        if (data.items && data.items.length > 0) {
+          this.carte.imageUrl = data.items[0].link;
+        }
+      }, (error) => {
+        console.error('Error:', error);
+      });
+  }
 
 }

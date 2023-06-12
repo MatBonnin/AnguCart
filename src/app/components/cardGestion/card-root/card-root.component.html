@@ -1,16 +1,16 @@
 <div>
   <div class="topPart">
-  <app-card-list  (valueChange)="updateValueFromChild($event)"></app-card-list>
-  <button class="delete-button" (click)="deleteCard()">  <i class="fa fa-trash"></i></button>
-  <app-card class="card" [cardId]="cardId" >
-  </app-card>
+    <app-card-list
+      (valueChange)="updateValueFromChild($event)"
+      [refresh]="refresh"
+    ></app-card-list>
+    <button class="delete-button" (click)="deleteCard()">
+      <i class="fa fa-trash"></i>
+    </button>
+    <app-card class="card" [cardId]="cardId"> </app-card>
   </div>
-  <hr>
+  <hr />
   <div class="bottomPart">
-    <app-card-form>
-
-    </app-card-form>
+    <app-card-form (valueChange)="refreshCardList()"> </app-card-form>
   </div>
-
 </div>
-

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { MenuService } from './components/menu/menu.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AnguCart';
+
+  menuVisible$: Observable<boolean>;
+
+  constructor(private menuService: MenuService) {
+    this.menuVisible$ = this.menuService.menuVisible$;
+  }
 }

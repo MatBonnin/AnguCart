@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { DataDeckService } from '../deckGestion/deck/dataDeck.service';
-import { DataService } from '../../services/data.service';
 
+import { Card } from 'src/app/interfaces/card.types';
+import { CardService } from '../../services/card.service';
+import { Deck } from 'src/app/interfaces/deck.types';
+import { DeckService } from '../../services/deck.service';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent  {
-  // ...
-  playerDeck: any; // Le deck du joueur
-  computerDeck: any; // Le deck de l'ordinateur
-  availableDecks: any; // Liste des decks disponibles
-  selectedDeckId: number | null = null; // L'ID du deck sélectionné par le joueur
-  usedPlayerCards: any[] = []; // Les cartes déjà utilisées par le joueur
-  usedComputerCards: any[] = []; // Les cartes déjà utilisées par l'ordinateur
+export class GameComponent implements OnInit {
+
+  playerDeck: Deck | null = null;
+  computerDeck: Deck | null = null;
+  availableDecks: Deck[] = [];
+  selectedDeckId: string | null = null;
+  usedPlayerCards: string[] = [];
+  usedComputerCards: string[] = [];
 
   showCardsInPlay: boolean = false;
   message: string = '';
@@ -23,86 +27,80 @@ export class GameComponent  {
   playerScore: number = 0;
   computerScore: number = 0;
 
-  round: number = 1; // Le tour actuel
+  round: number = 1;
   maxRounds: number = 5;
 
-  playerCard: any; // La carte sélectionnée par le joueur pour ce tour
-  computerCard: any;// La carte sélectionnée par l'ordinateur pour ce tour
+  playerCard: Card | null = null;
+  computerCard: Card | null = null;
 
-  constructor(private dataDeckService: DataDeckService, private dataService: DataService) { }
+  constructor(private deckService: DeckService, private cardService: CardService,private router:Router) { }
 
-  async ngOnInit() {
-    this.availableDecks = await this.dataDeckService.getDecks().toPromise();
+  ngOnInit() {
+     this.deckService.getDecks().subscribe((decks: Deck[])=>{
+      this.availableDecks = decks;
+    });
   }
 
-  selectDeck(deckId: number) {
+  selectDeck(deckId: string | null = null) {
     this.selectedDeckId = deckId;
 
-    // Trouvez le deck sélectionné et attribuez-le au joueur
-    this.playerDeck= this.availableDecks.find((deck: { id: number; }) => deck.id === deckId);
+    this.playerDeck = this.availableDecks.find((deck: Deck) => deck.id === deckId) || null;
 
-
-    // Sélectionnez un deck aléatoire pour l'ordinateur
-    const randomDeckIndex = Math.floor(Math.random() * this.availableDecks.length);
-    this.computerDeck = this.availableDecks[randomDeckIndex];
-
-  }
-
-
-  selectCard(card: any) {
-    if (this.usedPlayerCards.includes(card)) {
-      this.message = 'Vous avez déjà utilisé cette carte.';
-      return;
+    if (this.playerDeck !== null) {
+        this.playerDeck.cards = [...this.playerDeck.cards];
     }
 
-    this.playerCard = card;
-    this.usedPlayerCards.push(card);
+    let otherDecks = this.availableDecks.filter((deck: Deck) => deck.id !== this.selectedDeckId);
+    let randomDeckIndex = Math.floor(Math.random() * otherDecks.length);
+    this.computerDeck = otherDecks[randomDeckIndex];
 
-    let tries = this.computerDeck.cards.length;
-    let availableCards = this.computerDeck.cards.filter((card: any) => !this.usedComputerCards.includes(card));
-    let randomIndex = Math.floor(Math.random() * availableCards.length);
-    this.computerCard = availableCards[randomIndex];
-    this.usedComputerCards.push(this.computerCard);
-
-    this.showCardsInPlay = true;
-    setTimeout(() => {
-      this.playRound();
-    }, 5000);
+    if (this.computerDeck !== undefined) {
+      this.computerDeck.cards = [...this.computerDeck.cards];
+    }
   }
 
-  async playRound() {
-    // Comparez les cartes et mettez à jour les scores
+  selectCard(cardId: string) {
+    this.usedPlayerCards.push(cardId);
+    let availableCards = this.computerDeck?.cards.filter((cardId: string) => !this.usedComputerCards.includes(cardId));
 
-    let playerCardInfo: any;
-    let computerCardInfo: any;
+    let randomIndex = Math.floor(Math.random() * (availableCards ? availableCards.length : 0));
+    let computerCardId = availableCards ? availableCards[randomIndex] : '';
+    if (computerCardId !== '') {
+      this.usedComputerCards.push(computerCardId);
+    }
 
-    // Utilisez Promise.all pour attendre que les deux requêtes soient terminées
-    const [playerCardResponse, computerCardResponse] = await Promise.all([
-      this.dataService.getCardsById(this.playerCard).toPromise(),
-      this.dataService.getCardsById(this.computerCard).toPromise(),
-    ]);
+    this.cardService.getCardsById(cardId).subscribe((card: Card) => {
+      this.playerCard = card;
+    });
 
-    playerCardInfo = playerCardResponse;
-    computerCardInfo = computerCardResponse;
+    if (computerCardId !== '') {
+      this.cardService.getCardsById(computerCardId).subscribe((card: Card) => {
+        this.computerCard = card;
+        this.showCardsInPlay = true;
+        setTimeout(() => {
+          this.playRound();
+        }, 5000);
+      });
+    }
+  }
 
-    console.log(playerCardInfo);
-    console.log(computerCardInfo);
-
-    if (playerCardInfo.value >computerCardInfo.value) {
-      this.playerScore++;
-      this.message = 'Vous avez gagné cette manche !';
-    } else if (playerCardInfo.value < computerCardInfo.value) {
-      this.computerScore++;
-      this.message = "L'ordinateur a gagné cette manche !";
-    } else {
-      this.message = 'Égalité pour cette manche.';
+  playRound() {
+    if (this.playerCard && this.computerCard) {
+      if (this.playerCard.value > this.computerCard.value) {
+        this.playerScore++;
+        this.message = 'Vous avez gagné cette manche !';
+      } else if (this.playerCard.value < this.computerCard.value) {
+        this.computerScore++;
+        this.message = "L'ordinateur a gagné cette manche !";
+      } else {
+        this.message = 'Égalité pour cette manche.';
+      }
     }
 
     this.showCardsInPlay = false;
     this.round++;
 
     if (this.round > this.maxRounds) {
-      // Le jeu est terminé, affichez le message final
       if (this.playerScore > this.computerScore) {
         this.message = 'Félicitations, vous avez gagné !';
       } else if (this.playerScore < this.computerScore) {
@@ -110,9 +108,19 @@ export class GameComponent  {
       } else {
         this.message = "C'est une égalité.";
       }
+
+      setTimeout(() => {
+        this.resetGame();
+      }, 2000);
     }
-    this.playerDeck.cards = this.playerDeck.cards.filter((card: any) => card !== this.playerCard);
-    this.computerDeck.cards = this.computerDeck.cards.filter((card: any) => card !== this.computerCard);
+
+    if (this.playerDeck && this.playerCard) {
+      this.playerDeck.cards = this.playerDeck.cards.filter((cardId:string) => cardId !== this.playerCard!.id);
+    }
+
+    if (this.computerDeck && this.computerCard) {
+      this.computerDeck.cards = this.computerDeck.cards.filter((cardId:string) => cardId !== this.computerCard!.id);
+    }
   }
 
   async resetGame() {
@@ -124,8 +132,7 @@ export class GameComponent  {
     this.computerDeck = null;
     this.usedPlayerCards = [];
     this.usedComputerCards = [];
-    this.availableDecks =  await this.dataDeckService.getDecks().toPromise()
+    this.availableDecks = (await this.deckService.getDecks().toPromise()) || [];
+
   }
-
-
 }

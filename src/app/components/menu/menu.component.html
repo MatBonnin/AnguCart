@@ -1,20 +1,29 @@
-<!-- <nav class="menu">
-  <ul>
-    <li><a routerLink="/card">Card</a></li>
-    <li><a routerLink="/deck">Deck</a></li>
-    <li><a routerLink="/autre">autre</a></li>
-  </ul>
-</nav> -->
 <nav>
   <ul>
-    <li><a routerLink="/card">Card</a></li>
+    <li><a routerLink="/card" i18n="Card Link|Link to card page">Card</a></li>
     <li>
-      <a>Deck</a>
+      <a i18n="Deck Link|Link to deck page">Deck</a>
       <ul>
-        <li><a href="/deck">Afficher</a></li>
-        <li><a href="/deck/create">Creer</a></li>
+        <li>
+          <a href="/deck" i18n="Display Link|Link to display decks">Display</a>
+        </li>
+        <li>
+          <a href="/deck/create" i18n="Create Link|Link to create decks"
+            >Create</a
+          >
+        </li>
       </ul>
     </li>
-    <li><a href="/game">Jouer</a></li>
+    <li><a href="/game" i18n="Play Link|Link to play the game">Play</a></li>
+
+    <li>
+      <button
+        (click)="deconnexion()"
+        mat-icon-button
+        aria-label="Example icon button with a home icon"
+      >
+        <mat-icon color="primary">logout</mat-icon>
+      </button>
+    </li>
   </ul>
 </nav>

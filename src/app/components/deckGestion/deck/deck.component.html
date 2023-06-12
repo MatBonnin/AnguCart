@@ -1,16 +1,18 @@
 <div *ngIf="decks.length > 0">
   <div *ngFor="let d of decks" class="deck">
-    <button class="delete-button" (click)="deleteDeck(d.id)"><i class="fa fa-trash"></i></button>
-    <h2>{{d.name}}</h2>
+    <button class="delete-button" (click)="deleteDeck(d.id)">
+      <i class="fa fa-trash"></i>
+    </button>
+    <h2>{{ d.name }}</h2>
     <div class="cards">
       <div class="card-container" *ngFor="let c of d.cards">
         <app-card class="card" [cardId]="c"></app-card>
         <!-- Ajoutez le bouton de suppression avec l'icône pour chaque carte ici -->
-        <button class="card-delete-button" (click)="deleteCard(d.id,c)">
+        <button class="card-delete-button" (click)="deleteCard(d.id, c)">
           <i class="fa fa-trash"></i>
         </button>
       </div>
-      <div class="card-container add-card" (click)="addCard(d.id)" >
+      <div class="card-container add-card" (click)="addCard(d.id)">
         <div class="fake-card">
           <i class="fa fa-plus"></i>
         </div>

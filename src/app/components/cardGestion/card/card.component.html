@@ -1,10 +1,18 @@
-<div  *ngIf="carte !== null" class="card">
+<div *ngIf="carte !== null" class="card">
   <div class="card">
     <div class="card-header">
-      <h2 class="name">{{carte.name}}</h2>
+      <h2 class="name">{{ carte.value !== 0 ? carte.name : "" }}</h2>
     </div>
     <div class="card-content">
-      <p class="value">{{carte.value}}</p>
+      <p [ngClass]="carte.value !== 0 ? 'value' : 'emptyValue'">
+        {{ carte.value !== 0 ? carte.value : "Selectionner une carte" }}
+      </p>
+      <img
+        *ngIf="carte.imageUrl"
+        [src]="carte.imageUrl"
+        class="imgCard"
+        alt="{{ carte.name }}"
+      />
     </div>
   </div>
 </div>

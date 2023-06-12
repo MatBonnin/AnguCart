@@ -1,10 +1,9 @@
 <div class="dialog">
   <div mat-dialog-content>
     <form [formGroup]="deckForm">
-      <h1>update my deck</h1>
-
+      <h1 i18n="@@UpdateDeck">Update my deck</h1>
       <div class="form-group">
-        <label for="name">Deck name:</label>
+        <label for="name" i18n="@@deckFormLabelName:">Deck name:</label>
         <input
           type="text"
           class="form-control"
@@ -14,7 +13,7 @@
       </div>
 
       <div class="form-group">
-        <label>Select cards:</label>
+        <label i18n="@@selectCards">Select cards : </label>
         <div *ngIf="cards.length > 0" class="card-list">
           <div
             class="card"
@@ -23,21 +22,27 @@
             (click)="toggleCard(card)"
           >
             <h2>{{ card.name }}</h2>
-            <p>Value: {{ card.value }}</p>
+            <p i18n="@@CardValueLabel">Valeur : {{ card.value }}</p>
           </div>
         </div>
       </div>
       <div *ngIf="totalCardValue() > 0" class="form-text text-danger">
-        Point: {{ totalCardValue() }}/30
+        <span i18n="@@PointLabel">Point :</span> {{ totalCardValue() }}/30
       </div>
 
-      <button class="btn btn-primary" (click)="updateDeck()">
-        update deck
+      <button
+        class="btn btn-primary"
+        (click)="updateDeck()"
+        i18n="@@UpdateDeck"
+      >
+        Update my deck
       </button>
     </form>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onCancel()">Annuler</button>
-    <button mat-button (click)="onAdd()">Ajouter</button>
+    <button mat-button (click)="onCancel()" i18n="@@CancelButton">
+      Delete
+    </button>
+    <button mat-button (click)="onAdd()" i18n="@@SubmitAddButton">Add</button>
   </div>
 </div>

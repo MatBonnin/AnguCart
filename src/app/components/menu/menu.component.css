@@ -8,6 +8,8 @@
   font-family: Arial, sans-serif;
 }
 
+
+
 .menu ul {
   list-style-type: none;
   margin: 0;
@@ -54,6 +56,9 @@ nav ul li a {
 
 nav ul li:hover > ul {
   display: block;
+}
+.no-shadow {
+  box-shadow: none !important; /* Utilisez !important si nécessaire pour écraser les styles par défaut */
 }
 
 nav ul ul {

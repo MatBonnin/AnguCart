@@ -13,15 +13,15 @@ export class ConnexionService {
 
 
   addProfile(profile:any) {
-    console.log(profile)
+
 
     try{
       this.http.put('http://localhost:3010/api/profiles',profile).subscribe((data:any)=>{
-        console.log(data)
+
       })
     }
     catch(e){
-      console.log(e)
+
     }
   }
 

@@ -2,8 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { DataDeckService } from '../components/deckGestion/deck/dataDeck.service';
-import { DataService } from '../services/data.service';
+import { DeckService } from '../services/deck.service';
+import { CardService } from '../services/card.service';
+import { Card } from '../interfaces/card.types';
 
 @Component({
   selector: 'app-add-card-deck-dialog',
@@ -11,11 +12,11 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./add-card-deck-dialog.component.css']
 })
 export class AddCardDeckDialogComponent {
-  selectedCards: any = [];
+
   deckForm: FormGroup;
   // totalCardValue: number = 0;
 
-  constructor(public dialogRef: MatDialogRef<AddCardDeckDialogComponent>,private dataService: DataService,@Inject(MAT_DIALOG_DATA) public data: any,private dataDeckService: DataDeckService,private fb: FormBuilder) {
+  constructor(public dialogRef: MatDialogRef<AddCardDeckDialogComponent>,private CardService: CardService,@Inject(MAT_DIALOG_DATA) public data: any,private deckService: DeckService,private fb: FormBuilder) {
     this.deckForm = this.fb.group({
       name: [this.data.deck.name],
 
@@ -23,17 +24,17 @@ export class AddCardDeckDialogComponent {
     });
 
   }
-  apiData : Observable<any> = this.dataService.getCards();
+  apiData : Observable<any> = this.CardService.getCards();
   cards: any = [];
 
   ngOnInit(){
 
-    this.dataService.getCards().subscribe((cartes : any)=>{
-      console.log(cartes)
+    this.CardService.getCards().subscribe((cartes : any)=>{
+
       // this.cards = carte
       for(let i= 0; i<cartes.length;i++){
-        this.dataService.getCardsById(cartes[i].id).subscribe((carte : any)=>{
-          console.log(carte)
+        this.CardService.getCardsById(cartes[i].id).subscribe((carte : any)=>{
+
           this.cards.push(carte)
         });
       }
@@ -52,7 +53,7 @@ export class AddCardDeckDialogComponent {
 
         }
       else{
-        console.log("Vous avez atteint le nombre maximum de carte")
+
       }
       } else {
 
@@ -66,13 +67,13 @@ export class AddCardDeckDialogComponent {
 
     // Mise à jour du deck
     this.data.deck.name = this.deckForm.value.name;
-    this.dataDeckService.updateDeck(this.data.deck).subscribe(
+    this.deckService.updateDeck(this.data.deck).subscribe(
       response => {
         this.dialogRef.close();
-        console.log(response);
+        ;
       },
       error => {
-        console.log(error);
+        ;
       })
     }
 

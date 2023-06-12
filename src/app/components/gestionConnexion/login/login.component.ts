@@ -20,7 +20,7 @@ export class LoginComponent {
 
   async onSubmit(): Promise<any> {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      ;
       // Implémentez ici la logique d'inscription, par exemple en appelant un service d'authentification
 
       try{
@@ -28,7 +28,7 @@ export class LoginComponent {
          this.router.navigate(['']);
       }
       catch{
-        console.log("erreur")
+
         this.errorMessage = "L'utilisateur n'existe pas ou les informations d'identification sont incorrectes.";
       }
 

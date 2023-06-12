@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DataService } from '../../../services/data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Card } from 'src/app/interfaces/card.types';
+import { CardService } from '../../../services/card.service';
+import { Component } from '@angular/core';
+import { DeckService } from 'src/app/services/deck.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-deck-add',
@@ -11,10 +13,10 @@ import { Card } from 'src/app/interfaces/card.types';
 })
 export class DeckAddComponent {
   deckForm: FormGroup;
-  selectedCards: any = [];
+  selectedCards: string[] = [];
   totalCardValue: number = 0;
 
-  constructor(private dataService: DataService,private fb: FormBuilder) {
+  constructor(private cardService: CardService,private deckService: DeckService, private fb: FormBuilder) {
     this.deckForm = this.fb.group({
       name: [null,Validators.required],
 
@@ -27,10 +29,10 @@ export class DeckAddComponent {
  cards: Card[] = [];
   ngOnInit(){
 
-    this.dataService.getCards().subscribe((cartes : any)=>{
+    this.cardService.getCards().subscribe((cartes : any)=>{
       // this.cards = carte
       for(let i= 0; i<cartes.length;i++){
-        this.dataService.getCardsById(cartes[i].id).subscribe((carte : any)=>{
+        this.cardService.getCardsById(cartes[i].id).subscribe((carte : any)=>{
 
           this.cards.push(carte)
         });
@@ -39,12 +41,12 @@ export class DeckAddComponent {
 
   }
 
-  isSelected(cardId: any): boolean {
+  isSelected(cardId: string): boolean {
     return this.selectedCards.indexOf(cardId) !== -1;
   }
 
   toggleCard(card: Card) {
-    const cardId:number = card.id
+    const cardId:string = card.id
     // Add or remove the selected card from the list
 
       if (this.selectedCards.indexOf(cardId) === -1 ) {
@@ -53,34 +55,25 @@ export class DeckAddComponent {
             this.totalCardValue += card.value;
             this.selectedCards.push(cardId);
           }
-
-
       } else {
         this.totalCardValue -= card.value;
         this.selectedCards.splice(this.selectedCards.indexOf(cardId), 1);
       }
-
-
   }
 
   createDeck() {
-    // Check if the form is valid
     if (this.deckForm.valid && this.selectedCards.length > 0) {
-      // Create the deck and add the selected cards
-      const deck = {
+
+        this.deckService.addDeck({
+          id:'',
         name: this.deckForm.value.name,
         cards: this.selectedCards,
-
-      };
-
-      // TODO: Add the deck to your database or service
-      console.log(deck);
-      this.dataService.addDeck(deck).subscribe(
+      }).subscribe(
         response => {
-          console.log(response);
+
         },
         error => {
-          console.log(error);
+
         })
       // Reset the form and the selected cards
       this.deckForm.reset();

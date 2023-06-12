@@ -20,7 +20,7 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+      ;
       // Implémentez ici la logique d'inscription, par exemple en appelant un service d'authentification
       this.connexionService.addProfile(this.registerForm.value)
     }

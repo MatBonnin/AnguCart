@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input, SimpleChanges } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { DataService } from '../../../services/data.service';
-
+import { CardService } from '../../../services/card.service';
+import { Card } from 'src/app/interfaces/card.types';
 
 @Component({
   selector: 'app-card-list',
@@ -11,26 +11,38 @@ import { DataService } from '../../../services/data.service';
 })
 export class CardListComponent {
 
-  constructor(private dataService: DataService) { }
-  apiData : Observable<any> = this.dataService.getCards();
-  cartes: any = {};
-  ngOnInit(){
-    this.apiData.subscribe((carte : Object)=>{
-      console.log(carte)
-      this.cartes = carte
+  constructor(private CardService: CardService) { }
+  apiData: Observable<any> = this.CardService.getCards();
+  cartes: Card[] = [];
+  value: string = '';
+  @Output() valueChange = new EventEmitter<string>();
+
+
+  @Input() refresh: boolean = false;
+
+  ngOnInit() {
+    this.fetchCards();
+  }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    if (changes['refresh'] && changes['refresh'].currentValue) {
+     this.fetchCards();
+    }
+  }
+
+  fetchCards() {
+    this.apiData.subscribe((cartes: Card[]) => {
+
+      this.cartes = cartes;
+      console.log(this.fetchCards)
     });
   }
 
 
-  value : string = "";
-  @Output() valueChange = new EventEmitter<string>();
+
   updateValue(value: string) {
-    console.log(value)
     this.value = value;
-    this.valueChange.emit(this.value);
+    this.valueChange.emit(this.value.toString());
   }
-
-
-
 
 }

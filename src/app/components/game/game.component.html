@@ -1,42 +1,52 @@
 <div class="selectionDeck" *ngIf="!playerDeck">
-  <h2 style="text-align: center">Choisissez un deck :</h2>
+  <h2 style="text-align: center" i18n="@@SelectDeckTitle">Choose a deck:</h2>
   <div class="decks">
-    <mat-card *ngFor="let deck of availableDecks">
-      <mat-card-content>
-        {{ deck.name }}
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button (click)="selectDeck(deck.id)">
-          Sélectionner
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    <div *ngIf="availableDecks!.length < 2; else afficherDecks">
+      <span>Vous devez avoir au moins 2 decks pour jouer</span>
+    </div>
+    <ng-template #afficherDecks>
+      <mat-card *ngFor="let deck of availableDecks">
+        <mat-card-content>
+          {{ deck.name }}
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            (click)="selectDeck(deck.id)"
+            i18n="@@SelectDeckButton"
+          >
+            Select
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
   </div>
 </div>
-
 <div *ngIf="playerDeck?.cards" class="game-board">
   <h4 class="message">{{ message }}</h4>
-  <h3 class="tour">Tour : {{ round }} / {{ maxRounds }}</h3>
+  <h3 class="tour" i18n="@@RoundLabel">Round: {{ round }} / {{ maxRounds }}</h3>
   <div class="game-score">
-    <h4>Joueur : {{ playerScore }}</h4>
-    <h4>Ordinateur : {{ computerScore }}</h4>
+    <h4 i18n="@@PlayerScoreLabel">Player: {{ playerScore }}</h4>
+    <h4 i18n="@@ComputerScoreLabel">Computer: {{ computerScore }}</h4>
   </div>
-
   <div *ngIf="showCardsInPlay" class="cards-in-play">
     <div>
-      <h4>Carte du joueur</h4>
-      <app-card [cardId]="playerCard" class="card"></app-card>
+      <h4 i18n="@@PlayerCardLabel">Player's card</h4>
+      <app-card [cardId]="playerCard!.id" class="card"></app-card>
     </div>
     <div>
-      <h4>Carte de l'ordi</h4>
-      <app-card [cardId]="computerCard" class="card"></app-card>
+      <h4 i18n="@@ComputerCardLabel">Computer's card</h4>
+      <app-card [cardId]="computerCard!.id" class="card"></app-card>
     </div>
   </div>
-
-  <button mat-raised-button (click)="resetGame()">Réinitialiser</button>
+  <button mat-raised-button (click)="resetGame()" i18n="@@ResetGameButton">
+    Reset
+  </button>
 
   <div class="player-cards">
-    <span class="nameDeck">Mon deck : {{ playerDeck?.name }} </span>
+    <span class="nameDeck" i18n="@@PlayerDeckLabel"
+      >My deck: {{ playerDeck?.name }}</span
+    >
     <div class="cards">
       <app-card
         *ngFor="let card of playerDeck?.cards"

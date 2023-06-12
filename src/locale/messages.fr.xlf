@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr-FR" datatype="plaintext" original="ng2.template">
+    <body>
+    <?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+     <trans-unit id="CardValueLabel" datatype="html">
+        <source>Valeur : <x id="INTERPOLATION" equiv-text="{{ card.value }}"/></source>
+        <target>Valeur : <x id="INTERPOLATION" equiv-text="{{ card.value }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/add-card-deck-dialog/add-card-deck-dialog.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="PointLabel" datatype="html">
+        <source>Point :</source>
+        <target>Point :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/add-card-deck-dialog/add-card-deck-dialog.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="CancelButton" datatype="html">
+        <source> Delete </source>
+        <target> Supprimer </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/add-card-deck-dialog/add-card-deck-dialog.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+      </trans-unit>
+    <trans-unit id="UpdateDeck" datatype="html">
+        <source>Update my deck</source>
+        <target>Mettre à jour mon deck</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/add-card-deck-dialog/add-card-deck-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/add-card-deck-dialog/add-card-deck-dialog.component.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormLabelName:" datatype="html">
+        <source>Deck name:</source>
+        <target>Nom du deck :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/add-card-deck-dialog/add-card-deck-dialog.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+     <trans-unit id="LoginLabel" datatype="html">
+        <source>Login</source>
+        <target>Connexion</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gestionConnexion/gestion-connexion-root/gestion-connexion-root.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="RegisterLabel" datatype="html">
+        <source>Register</source>
+        <target>Inscription</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/gestionConnexion/gestion-connexion-root/gestion-connexion-root.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="NameInputLabel" datatype="html">
+        <source> Name: <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;text&quot; formControlName=&quot;name&quot; /&gt;"/></source>
+        <target> Nom : <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;text&quot; formControlName=&quot;name&quot; /&gt;"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/cardGestion/card-form/card-form.component.html</context>
+          <context context-type="linenumber">2,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ValueInputLabel" datatype="html">
+        <source> Value: <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;number&quot; formControlName=&quot;value&quot; /&gt;"/></source>
+        <target> Valeur <x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input type=&quot;number&quot; formControlName=&quot;value&quot; /&gt;"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/cardGestion/card-form/card-form.component.html</context>
+          <context context-type="linenumber">6,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SubmitAddButton" datatype="html">
+        <source>Add</source>
+        <target>Ajouter</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/cardGestion/card-form/card-form.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormTitle" datatype="html">
+        <source>Create a new deck</source>
+         <target>Créer un nouveau deck</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormLabelName" datatype="html">
+        <source>Deck name:</source>
+          <target>Nom du deck :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormErrorName" datatype="html">
+        <source> Please enter a name for your deck. </source>
+           <target>Entrer un nom de deck :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="selectCards" datatype="html">
+        <source>Select cards:</source>
+        <target>Selectionner une card :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormCardValue" datatype="html">
+        <source>Value: <x id="INTERPOLATION" equiv-text="{{ card.value }}"/></source>
+           <target>Valeur: <x id="INTERPOLATION" equiv-text="{{ card.value }}"/> </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormErrorSelectCards" datatype="html">
+        <source> Please select at least one card for your deck. </source>
+        <target>Selectionner au moins une carte pour votre deck :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">34,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormErrorMaxCards" datatype="html">
+        <source> Maximum number of cards reached. </source>
+        <target>Nombre maximum de carte atteint :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">41,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormErrorTotalValue" datatype="html">
+        <source> Point: <x id="INTERPOLATION" equiv-text="{{ totalCardValue }}"/>/30 </source>
+        <target>Point: <x id="INTERPOLATION" equiv-text="{{ totalCardValue }}"/>/30</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">48,50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deckFormButton" datatype="html">
+        <source> Create deck </source>
+        <target>Créer le deck</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/deckGestion/deck-add/deck-add.component.html</context>
+          <context context-type="linenumber">56,58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SelectDeckTitle" datatype="html">
+        <source>Choose a deck:</source>
+        <target>Choisir un deck :</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="SelectDeckButton" datatype="html">
+        <source> Select </source>
+        <target>Selectionner</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="RoundLabel" datatype="html">
+        <source>Round: <x id="INTERPOLATION" equiv-text="{{ round }}"/> / <x id="INTERPOLATION_1" equiv-text="{{ maxRounds }}"/></source>
+        <target>Round: <x id="INTERPOLATION" equiv-text="{{ round }}"/> / <x id="INTERPOLATION_1" equiv-text="{{ maxRounds }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="PlayerScoreLabel" datatype="html">
+        <source>Player: <x id="INTERPOLATION" equiv-text="{{ playerScore }}"/></source>
+        <target>Joueur: <x id="INTERPOLATION" equiv-text="{{ playerScore }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ComputerScoreLabel" datatype="html">
+        <source>Computer: <x id="INTERPOLATION" equiv-text="{{ computerScore }}"/></source>
+        <target>Ordinateur: <x id="INTERPOLATION" equiv-text="{{ computerScore }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">25,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="PlayerCardLabel" datatype="html">
+        <source>Player&apos;s card</source>
+        <target>Carte du joueur</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ComputerCardLabel" datatype="html">
+        <source>Computer&apos;s card</source>
+        <target>Carte de l&apos;ordinateur</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ResetGameButton" datatype="html">
+        <source> Reset </source>
+        <target>Recommencer</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+       <trans-unit id="PlayerDeckLabel" datatype="html">
+        <source>My deck: <x id="INTERPOLATION" equiv-text="{{ playerDeck?.name }}"/></source>
+        <target>Mon deck: <x id="INTERPOLATION" equiv-text="{{ playerDeck?.name }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/game/game.component.html</context>
+          <context context-type="linenumber">43,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8026571702957075985" datatype="html">
+        <source>Card</source>
+        <target>Carte</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/menu/menu.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <note priority="1" from="description">Link to card page</note>
+        <note priority="1" from="meaning">Card Link</note>
+      </trans-unit>
+      <trans-unit id="7233183932519992210" datatype="html">
+        <source>Deck</source>
+          <target>Deck</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/menu/menu.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">Link to deck page</note>
+        <note priority="1" from="meaning">Deck Link</note>
+      </trans-unit>
+      <trans-unit id="7659811555288524183" datatype="html">
+        <source>Display</source>
+          <target>Afficher</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/menu/menu.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">Link to display decks</note>
+        <note priority="1" from="meaning">Display Link</note>
+      </trans-unit>
+      <trans-unit id="4480400382526405980" datatype="html">
+        <source>Create</source>
+          <target>Créer</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/menu/menu.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Link to create decks</note>
+        <note priority="1" from="meaning">Create Link</note>
+      </trans-unit>
+      <trans-unit id="1006867015325139914" datatype="html">
+        <source>Play</source>
+          <target>Jouer</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/menu/menu.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description">Link to play the game</note>
+        <note priority="1" from="meaning">Play Link</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

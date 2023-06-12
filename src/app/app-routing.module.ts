@@ -12,8 +12,8 @@ const routes: Routes = [
   {path:'card',component:CardRootComponent, canActivate: [AuthGuard]}, // Ajoutez canActivate
   {path:'deck',component:DeckComponent, canActivate: [AuthGuard]}, // Ajoutez canActivate
   {path:'deck/create',component:DeckAddComponent, canActivate: [AuthGuard]}, // Ajoutez canActivate
-  {path:'login',component:GestionConnexionRootComponent},
-  {path:'game',component:GameComponent}];
+  {path:'login',component:GestionConnexionRootComponent, canActivate: [AuthGuard]},
+  {path:'game',component:GameComponent, canActivate: [AuthGuard]}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

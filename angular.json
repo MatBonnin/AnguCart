@@ -9,6 +9,15 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "fr": {
+            "translation": "src/locale/messages.fr.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -32,6 +41,7 @@
             "scripts": []
           },
           "configurations": {
+
             "production": {
               "budgets": [
                 {
@@ -46,6 +56,12 @@
                 }
               ],
               "outputHashing": "all"
+            },
+
+            "fr": {
+              "localize": ["fr"],
+              "outputPath": "dist/under-construction-fr/",
+              "i18nMissingTranslation": "error"
             },
             "development": {
               "buildOptimizer": false,
@@ -63,6 +79,9 @@
           "configurations": {
             "production": {
               "browserTarget": "AnguCart:build:production"
+            },
+            "fr": {
+              "browserTarget": "AnguCart:build:fr"
             },
             "development": {
               "browserTarget": "AnguCart:build:development"
